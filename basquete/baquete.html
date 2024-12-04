@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Times 3x3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #000000;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+            width: 250px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            border: 3px solid black;
+            border-radius: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ffffffc9;
+            color: rgb(0, 0, 0);   
+            
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #6200ff;
+        }
+
+        .feedback {
+            font-size: 20px;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .verde {
+            color: #042de0;
+            background-color: #d4edda;
+        }
+
+        .vermelho {
+            color: #000000;
+            background-color: #f8d7da;
+        }
+
+        .info {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Times de Basquete 3x3</h1>
+        <p>Quantos interessados no campeonato de basquete?</p>
+        <input type="number" id="numInteressados" placeholder="Insira o número de interessados" />
+        <button onclick="calcularTimes()">Calcular Times</button>
+
+        <div id="resultado" class="feedback"></div>
+        <div id="info" class="info"></div>
+    </div>
+
+    <script>
+        function calcularTimes() {
+            // Pegando o número de interessados
+            const numInteressados = parseInt(document.getElementById('numInteressados').value);
+            
+            // Verificando se o número inserido é válido
+            if (isNaN(numInteressados) || numInteressados <= 0) {
+                document.getElementById('resultado').textContent = "Por favor, insira um número válido de interessados.";
+                document.getElementById('resultado').className = "azul";
+                return;
+            }
+
+            // Calculando o número de times
+            const numTimes = Math.floor(numInteressados / 3);
+            const sobrando = numInteressados % 3;
+
+            // Exibindo o resultado
+            if (sobrando === 0) {
+                document.getElementById('resultado').textContent = `Você pode formar ${numTimes} times completos de 3 pessoas!`;
+                document.getElementById('resultado').className = "verde";
+                document.getElementById('info').textContent = "";
+            } else {
+                document.getElementById('resultado').textContent = `Você pode formar ${numTimes} times completos e sobra(m) ${sobrando} pessoa(s).`;
+                document.getElementById('resultado').className = "vermelho";
+                document.getElementById('info').textContent = "Talvez você precise organizar mais alguns times ou deixar pessoas de fora.";
+            }
+        }
+    </script>
+</body>
+</html>
